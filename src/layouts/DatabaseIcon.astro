@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+const { size = 24, href, src, name } = Astro.props;
+const linkSize = size === 24 ? "" : "w-1/2";
+---
+
+<a
+  href={href}
+  class=`hover:bg-slate-700 py-3 px-5 rounded hover:cursor-pointer transition ease-in-out ${linkSize}`
+>
+  <div class={`w-${size} mb-2`}>
+    <Image src={src} alt={`${name} Icon`} />
+  </div>
+
+  {name && <p class="text-center">{name}</p>}
+</a>
