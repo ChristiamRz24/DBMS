@@ -1,0 +1,10 @@
+{
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "pnpm-lock.yaml,astro.config.mjs,tailwind.config.mjs,.prettierrc.mjs,.gitignore"
+  }
+}
