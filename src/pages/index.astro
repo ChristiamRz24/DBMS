@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DatabaseIcon from "../layouts/DatabaseIcon.astro";
+
+// icons
+import mariadbIcon from "/public/mariadb.svg";
+import mysqlIcon from "/public/mysql.svg";
+import oracleIcon from "/public/oracle.svg";
+import pgIcon from "/public/postgresql.svg";
+import sqliteIcon from "/public/sqlite.svg";
+import sqlserverIcon from "/public/sqlserver.svg";
+---
+
+<Layout title="Astro">
+  <div class="h-screen flex flex-col justify-center">
+    <h1 class="text-lg text-center mb-5 text-slate-500">
+      Selecciona una base de datos
+    </h1>
+    <div class="flex flex-wrap items-center justify-center content-center">
+      <DatabaseIcon href="/mariadb" src={mariadbIcon} name="MariaDB" />
+      <DatabaseIcon href="/mysql" src={mysqlIcon} name="MySQL" />
+      <DatabaseIcon href="/oracle" src={oracleIcon} name="Oracle" />
+      <DatabaseIcon href="/postgresql" src={pgIcon} name="PostgreSQL" />
+      <DatabaseIcon href="/sqlite" src={sqliteIcon} name="SQLite" />
+      <DatabaseIcon href="/sqlserver" src={sqlserverIcon} name="SQL Server" />
+    </div>
+  </div>
+</Layout>
