@@ -1,16 +1,20 @@
 ---
 import { Image } from "astro:assets";
-const { size = 24, href, src, name } = Astro.props;
-const linkSize = size === 24 ? "" : "w-1/2";
+const { size = "lg", href, src, name } = Astro.props;
+
+let imgContainerClass = "w-24";
+if (size === "md") imgContainerClass = "w-12";
+if (size === "sm") imgContainerClass = "w-6";
 ---
 
 <a
   href={href}
-  class=`hover:bg-slate-700 py-3 px-5 rounded hover:cursor-pointer transition ease-in-out ${linkSize}`
+  class=`hover:bg-slate-700 py-3 px-5 rounded hover:cursor-pointer transition ease-in-out`
 >
-  <div class={`w-${size} mb-2`}>
+  <!-- lg: w-24, sm: w-12 -->
+  <div class={imgContainerClass}>
     <Image src={src} alt={`${name} Icon`} />
   </div>
 
-  {name && <p class="text-center">{name}</p>}
+  {name && <p class="mt-2 text-center">{name}</p>}
 </a>
