@@ -2,9 +2,9 @@ import { client } from "../../../../databases/mysql/client";
 
 export const GET = async () => {
   const get_table_names = `
-    SELECT table_name
-    FROM information_schema.tables
-    WHERE table_schema = 'mudanzas';
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_schema = 'mudanza' AND table_name = 'articulos';
   `;
 
   try {
