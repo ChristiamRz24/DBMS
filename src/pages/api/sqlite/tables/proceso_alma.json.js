@@ -2,9 +2,20 @@ import { client } from "../../../../databases/sqlite/client";
 
 export const GET = async () => {
   const get_table_names = `
-    SELECT name
-    FROM sqlite_master
-    WHERE type = 'table'
+  CREATE TABLE IF NOT EXISTS prueba (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT,
+    email TEXT
+);
+
+CREATE TRIGGER IF NOT EXISTS insertar_prueba_trigger
+AFTER INSERT ON prueba
+BEGIN
+   
+    SELECT 'prueba insertado: ' || new.nombre || ' - ' || new.email;
+END;
+
+INSERT INTO prueba (nombre, email) VALUES ('Ejemplo', 'ejemplo@example.com');
   `;
 
   try {
