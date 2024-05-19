@@ -1,19 +1,29 @@
 ---
+interface Props {
+  size?: "sm" | "md" | "lg";
+  href: string;
+  src: any;
+  name?: string;
+}
+
 import { Image } from "astro:assets";
-const { size = "lg", href, src, name } = Astro.props;
+
+const { size = "lg", href, src, name } = Astro.props as Props;
 
 let imgContainerClass = "w-24";
 if (size === "md") imgContainerClass = "w-12";
 if (size === "sm") imgContainerClass = "w-6";
+
+const alt = name ? `${name} Icon` : "Icon";
 ---
 
 <a
   href={href}
-  class=`hover:bg-slate-700 py-3 px-5 rounded hover:cursor-pointer transition ease-in-out`
+  class="hover:bg-slate-700 py-3 px-5 rounded hover:cursor-pointer transition ease-in-out"
 >
   <!-- lg: w-24, sm: w-12 -->
   <div class={imgContainerClass}>
-    <Image src={src} alt={`${name} Icon`} />
+    <Image src={src} alt={alt} />
   </div>
 
   {name && <p class="mt-2 text-center">{name}</p>}
