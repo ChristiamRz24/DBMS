@@ -1,6 +1,10 @@
 ---
 import DBMS from "../layouts/DBMS.astro";
+import Layout from "../layouts/Layout.astro";
+
 import { dbNames } from "../utils/constants";
 ---
 
-<DBMS pageName={dbNames.MYSQL} />
+<Layout title="MySQL">
+  <DBMS pageName={dbNames.MYSQL} />
+</Layout>

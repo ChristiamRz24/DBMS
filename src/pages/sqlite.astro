@@ -1,6 +1,10 @@
 ---
 import DBMS from "../layouts/DBMS.astro";
+import Layout from "../layouts/Layout.astro";
+
 import { dbNames } from "../utils/constants";
 ---
 
-<DBMS pageName={dbNames.SQLITE} />
+<Layout title="SQLite">
+  <DBMS pageName={dbNames.SQLITE} />
+</Layout>
