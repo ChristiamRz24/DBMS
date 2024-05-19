@@ -1,0 +1,18 @@
+---
+import "../pages/_index.css";
+
+import Aside from "./components/Aside.astro";
+import Section from "./components/Section.astro";
+import ChangeDB from "./ui/ChangeDB.astro";
+
+const { pageName } = Astro.props;
+
+import fetchData from "../services/fetchData";
+const tableNamesURL = `http://localhost:4321/api/${pageName}/tables/names.json`;
+const tableNames = await fetchData(tableNamesURL);
+---
+
+<main class="grid grid-cols-12 min-h-svh">
+  <Aside />
+  <Section />
+</main>
