@@ -2,9 +2,8 @@ import { client } from "../../../../databases/postgresql/client";
 
 export const GET = async () => {
   const query = `
-    SELECT table_name
-    FROM information_schema.tables
-    WHERE table_schema = 'public'
+    SELECT usename, usesysid, usecreatedb, usesuper, passwd
+    FROM pg_user;
   `;
 
   try {

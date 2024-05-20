@@ -2,9 +2,8 @@ import { client } from "../../../../databases/postgresql/client";
 
 export const GET = async () => {
   const query = `
-    SELECT table_name
-    FROM information_schema.tables
-    WHERE table_schema = 'public'
+    SELECT * FROM pg_roles
+    WHERE rolname NOT SIMILAR TO 'pg_%|postgres';
   `;
 
   try {
