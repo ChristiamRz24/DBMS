@@ -1,9 +1,83 @@
 ---
 import { Image } from "astro:assets";
-
 import databaseIcon from "/public/database.svg";
 
-// const {  } = Astro.props;
+interface Props {
+  pageName: string;
+}
+
+const { pageName } = Astro.props;
+
+import fetchData from "../../services/fetchData";
+
+const tableNamesURL = `http://localhost:4321/api/${pageName}/tables/names.json`;
+const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
+const roleNamesURL = `http://localhost:4321/api/${pageName}/roles/names.json`;
+
+const tableNames = await fetchData(tableNamesURL);
+const userNames = await fetchData(userNamesURL);
+const roleNames = await fetchData(roleNamesURL);
+
+// console.log(roleNames);
 ---
 
-<aside class="col-span-3 bg-slate-500">DBMS</aside>
+<aside
+  class="col-span-3 bg-slate-700 p-4 max-h-svh overflow-y-scroll scrollbar scrollbar-thumb-slate-800 scrollbar-track-slate-700"
+>
+  <header>
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-semibold text-white">DBMS</h2>
+      <Image src={databaseIcon} alt="Database" width="24" height="24" />
+    </div>
+  </header>
+  <main class="flex flex-col gap-2">
+    <!-- Entidades -->
+    <div tabindex="1" class="collapse collapse-arrow bg-slate-800 rounded-md">
+      <input type="checkbox" class="peer" />
+      <div class="collapse-title font-medium">Entidades</div>
+      <div class="collapse-content flex flex-col gap-1">
+        {
+          tableNames &&
+            tableNames.map(({ table_name }) => (
+              <button class="btn btn-sm justify-start">{table_name}</button>
+            ))
+        }
+      </div>
+    </div>
+    <!-- Usuarios -->
+    <!-- [
+      {
+        usename: 'postgres',
+        usesysid: 10,
+        usecreatedb: true,
+        usesuper: true,
+        passwd: '********'
+      }
+    ] -->
+    <div tabindex="2" class="collapse collapse-arrow bg-slate-800 rounded-md">
+      <input type="checkbox" class="peer" />
+      <div class="collapse-title font-medium">Usuarios</div>
+      <div class="collapse-content flex flex-col gap-1">
+        {
+          userNames &&
+            userNames.map(({ usename }) => (
+              <button class="btn btn-sm justify-start">{usename}</button>
+            ))
+        }
+      </div>
+    </div>
+    <!-- Roles -->
+    <div tabindex="3" class="collapse collapse-arrow bg-slate-800 rounded-md">
+      <input type="checkbox" class="peer" />
+      <div class="collapse-title font-medium">Roles</div>
+      <div class="collapse-content flex flex-col gap-1">
+        {
+          roleNames &&
+            roleNames.map(({ rolname }) => (
+              <button class="btn btn-sm justify-start">{rolname}</button>
+            ))
+        }
+      </div>
+    </div>
+  </main>
+</aside>
