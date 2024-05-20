@@ -11,9 +11,10 @@ import { Image } from "astro:assets";
 const { size = "lg", href, src, name } = Astro.props as Props;
 
 let imgContainerClass = "w-24";
-if (size === "md") imgContainerClass = "w-12";
-if (size === "sm") imgContainerClass = "w-6";
+if (size === "md") imgContainerClass = "w-10";
+if (size === "sm") imgContainerClass = "w-8";
 
+imgContainerClass = `mx-auto ${imgContainerClass}`;
 const alt = name ? `${name} Icon` : "Icon";
 ---
 
