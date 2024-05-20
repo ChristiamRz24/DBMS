@@ -42,6 +42,11 @@ const roleNames = await fetchData(roleNamesURL);
               <button class="btn btn-sm justify-start">{table_name}</button>
             ))
         }
+        {
+          tableNames.length === 0 && (
+            <p class="text-sm text-gray-400">No se encontraron entidades</p>
+          )
+        }
       </div>
     </div>
     <!-- Usuarios -->
@@ -64,6 +69,11 @@ const roleNames = await fetchData(roleNamesURL);
               <button class="btn btn-sm justify-start">{usename}</button>
             ))
         }
+        {
+          userNames.length === 0 && (
+            <p class="text-sm text-gray-400">No se encontraron usuarios</p>
+          )
+        }
       </div>
     </div>
     <!-- Roles -->
@@ -76,6 +86,11 @@ const roleNames = await fetchData(roleNamesURL);
             roleNames.map(({ rolname }) => (
               <button class="btn btn-sm justify-start">{rolname}</button>
             ))
+        }
+        {
+          roleNames.length === 0 && (
+            <p class="text-sm text-gray-400">No se encontraron roles</p>
+          )
         }
       </div>
     </div>
