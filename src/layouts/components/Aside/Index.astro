@@ -1,0 +1,45 @@
+---
+interface Props {
+  pageName: string;
+}
+
+const { pageName } = Astro.props;
+
+import { Image } from "astro:assets";
+import ChangeDB from "../../ui/ChangeDB.astro";
+import databaseIcon from "/public/database.svg";
+
+import Tables from "./Tables.astro";
+import Users from "./Users.astro";
+import Roles from "./Roles.astro";
+---
+
+<aside
+  class="col-span-3 bg-slate-700 p-4 max-h-svh overflow-y-scroll scrollbar scrollbar-thumb-slate-800 scrollbar-track-slate-700 border-e-[1px] border-slate-500"
+>
+  <header>
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-semibold text-white">
+        DBMS <span class="text-slate-400">{pageName}</span>
+      </h2>
+      <Image src={databaseIcon} alt="Database" width="24" height="24" />
+    </div>
+  </header>
+  <main class="flex flex-col gap-2">
+    <Tables pageName={pageName} />
+    <Users pageName={pageName} />
+    <Roles pageName={pageName} />
+  </main>
+  <div class="divider"></div>
+  <footer>
+    <div class="grid grid-cols-2 my-5 gap-2">
+      <button class="btn btn-sm btn-primary">Crear usuario</button>
+      <button class="btn btn-sm btn-primary">Crear rol</button>
+      <button class="btn btn-sm btn-primary col-span-2">
+        Generar CRUD para las entidades
+      </button>
+    </div>
+    <div class="divider"></div>
+    <ChangeDB />
+  </footer>
+</aside>
