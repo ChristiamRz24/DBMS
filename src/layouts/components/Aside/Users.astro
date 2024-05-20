@@ -1,0 +1,30 @@
+---
+interface Props {
+  pageName: string;
+}
+
+const { pageName } = Astro.props;
+
+import fetchData from "../../../services/fetchData";
+const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
+const userNames = await fetchData(userNamesURL);
+---
+
+<!-- [{ usename, usesysid, usecreatedb, usesuper, passwd }] -->
+<div tabindex="2" class="collapse collapse-arrow bg-slate-800 rounded-md">
+  <input type="checkbox" class="peer" />
+  <div class="collapse-title font-medium">Usuarios</div>
+  <div class="collapse-content flex flex-col gap-1">
+    {
+      userNames &&
+        userNames.map(({ usename }) => (
+          <button class="btn btn-sm justify-start">{usename}</button>
+        ))
+    }
+    {
+      userNames.length === 0 && (
+        <p class="text-sm text-gray-400">No se encontraron usuarios</p>
+      )
+    }
+  </div>
+</div>

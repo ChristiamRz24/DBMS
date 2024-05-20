@@ -10,19 +10,15 @@ import sqliteIcon from "/public/sqlite.svg";
 import sqlserverIcon from "/public/sqlserver.svg";
 ---
 
-<div class="dropdown dropdown-hover">
-  <div
-    tabindex="0"
-    role="button"
-    class="btn m-1 bg-slate-950 hover:bg-slate-800"
-  >
+<div class="dropdown dropdown-hover dropdown-top w-full">
+  <div tabindex="4" role="button" class="btn btn-sm btn-neutral w-full">
     Cambiar base de datos
   </div>
   <ul
-    tabindex="0"
-    class="dropdown-content z-[1] menu p-2 shadow bg-slate-950 rounded-box w-52"
+    tabindex="4"
+    class="dropdown-content z-[5] menu p-2 shadow bg-base-100 rounded-box w-full"
   >
-    <div class="flex flex-wrap items-center justify-center content-center">
+    <div class="grid grid-cols-3">
       <DatabaseIcon size="md" href="/mariadb" src={mariadbIcon} />
       <DatabaseIcon size="md" href="/mysql" src={mysqlIcon} />
       <DatabaseIcon size="md" href="/oracle" src={oracleIcon} />

@@ -1,0 +1,29 @@
+---
+interface Props {
+  pageName: string;
+}
+
+const { pageName } = Astro.props;
+
+import fetchData from "../../../services/fetchData";
+const tableNamesURL = `http://localhost:4321/api/${pageName}/tables/names.json`;
+const tableNames = await fetchData(tableNamesURL);
+---
+
+<div tabindex="1" class="collapse collapse-arrow bg-slate-800 rounded-md">
+  <input type="checkbox" class="peer" />
+  <div class="collapse-title font-medium">Entidades</div>
+  <div class="collapse-content flex flex-col gap-1">
+    {
+      tableNames &&
+        tableNames.map(({ table_name }) => (
+          <button class="btn btn-sm justify-start">{table_name}</button>
+        ))
+    }
+    {
+      tableNames.length === 0 && (
+        <p class="text-sm text-gray-400">No se encontraron entidades</p>
+      )
+    }
+  </div>
+</div>

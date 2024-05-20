@@ -1,0 +1,29 @@
+---
+interface Props {
+  pageName: string;
+}
+
+const { pageName } = Astro.props;
+
+import fetchData from "../../../services/fetchData";
+const roleNamesURL = `http://localhost:4321/api/${pageName}/roles/names.json`;
+const roleNames = await fetchData(roleNamesURL);
+---
+
+<div tabindex="3" class="collapse collapse-arrow bg-slate-800 rounded-md">
+  <input type="checkbox" class="peer" />
+  <div class="collapse-title font-medium">Roles</div>
+  <div class="collapse-content flex flex-col gap-1">
+    {
+      roleNames &&
+        roleNames.map(({ rolname }) => (
+          <button class="btn btn-sm justify-start">{rolname}</button>
+        ))
+    }
+    {
+      roleNames.length === 0 && (
+        <p class="text-sm text-gray-400">No se encontraron roles</p>
+      )
+    }
+  </div>
+</div>
