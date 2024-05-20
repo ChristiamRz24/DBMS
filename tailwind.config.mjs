@@ -9,5 +9,9 @@ export default {
     // Add your daisy ui themes here
     themes: ["night"],
   },
-  plugins: [require("daisyui"), require("@tailwindcss/typography")],
+  plugins: [
+    require("daisyui"),
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/typography"),
+  ],
 };
