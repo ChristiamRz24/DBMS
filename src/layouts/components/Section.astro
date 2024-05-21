@@ -2,7 +2,44 @@
 // const {  } = Astro.props;
 ---
 
-<div class="mockup-browser border bg-base-200 left-5" style="width: 500px; height: 500px;">
-    <div class="absolute top-0 left-0 p-2 bg-base-200  text-2xl">Table Details</div>
-    
+<div class="col-span-9 bg-slate-800 flex flex-col">
+  <div class="flex h-1/2">
+    <div class="bg-inherit m-3 flex flex-col gap-2 w-1/2">
+      <header class="bg-slate-700 rounded-md px-3 py-2 font-semibold text-md">
+        nombre_tabla <span class="badge badge-success badge-sm font-bold">
+          detalles
+        </span>
+      </header>
+      <main class="overflow-y-auto bg-slate-700 rounded-md">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>nombre del atributo</th>
+              <th>tipo de dato</th>
+              <th>es opcional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id_tabla</td>
+              <td>serial</td>
+              <td>no</td>
+            </tr>
+            <tr>
+              <td>nombre_tabla</td>
+              <td>varchar</td>
+              <td>no</td>
+            </tr>
+            <tr>
+              <td>apellido_tabla</td>
+              <td>varchar</td>
+              <td>no</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+    <div class="bg-slate-700 w-1/2">Query SQL</div>
+  </div>
+  <div class="bg-inherit border-t border-slate-500 h-1/2">Table Result</div>
 </div>
