@@ -5,7 +5,9 @@ interface Props {
 
 const { pageName } = Astro.props;
 
-import Modal from "../Modal.astro";
+import Modal from "../Modals/BaseModal.astro";
+import BackupDB from "../Modals/BackupDB.astro";
+
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
 import Check from "../Forms/Check.astro";
@@ -50,7 +52,9 @@ import Roles from "./Roles.astro";
     </div>
     <div class="divider text-xs">BASE DE DATOS</div>
     <div class="grid grid-cols-2 gap-2">
-      <button class="btn btn-sm btn-outline">Respaldar</button>
+      <button class="btn btn-sm btn-outline" onclick="backup_db.showModal()">
+        Respaldar
+      </button>
       <button class="btn btn-sm btn-outline">Restaurar</button>
     </div>
     <div class="divider"></div>
@@ -68,3 +72,5 @@ import Roles from "./Roles.astro";
   <Input type="text" label="Nombre" example="admin" />
   <Check label="Permisos" options={["sysdba", "sysoper", "read only"]} />
 </Modal>
+
+<BackupDB id="backup_db" />
