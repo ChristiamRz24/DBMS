@@ -15,7 +15,7 @@ import Roles from "./Roles.astro";
 ---
 
 <aside
-  class="col-span-3 bg-slate-700 p-4 max-h-svh overflow-y-scroll scrollbar scrollbar-thumb-slate-800 scrollbar-track-slate-700 border-e border-slate-500"
+  class="col-span-3 bg-slate-700 p-4 max-h-svh overflow-y-scroll scrollbar scrollbar-thumb-slate-800 scrollbar-track-slate-700"
 >
   <header>
     <div class="flex items-center justify-between mb-5">
@@ -38,6 +38,11 @@ import Roles from "./Roles.astro";
       <button class="btn btn-sm btn-primary col-span-2">
         Generar CRUD para las entidades
       </button>
+    </div>
+    <div class="divider text-xs">BASE DE DATOS</div>
+    <div class="grid grid-cols-2 gap-2">
+      <button class="btn btn-sm btn-outline">Respaldar</button>
+      <button class="btn btn-sm btn-outline">Restaurar</button>
     </div>
     <div class="divider"></div>
     <ChangeDB />
