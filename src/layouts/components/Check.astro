@@ -1,7 +1,7 @@
 ---
 interface Props {
   label: string;
-  options: string[];
+  options: string[] | null;
 }
 
 const { label, options } = Astro.props as Props;
@@ -9,16 +9,21 @@ const { label, options } = Astro.props as Props;
 
 <Fragment>
   <p>{label}</p>
-  <div class="grid mb-8 grid-cols-2 md:grid-cols-3">
-    {
-      options.map((option) => (
-        <div class="form-control flex items-start">
-          <label class="label cursor-pointer">
-            <span class="label-text">{option}</span>
-            <input type="checkbox" class="toggle ms-3" />
-          </label>
-        </div>
-      ))
-    }
-  </div>
+  {
+    options && (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {options.map((option) => (
+          <div class="form-control flex items-start">
+            <label class="label cursor-pointer">
+              <span class="label-text">{option}</span>
+              <input type="checkbox" class="toggle ms-3" />
+            </label>
+          </div>
+        ))}
+      </div>
+    )
+  }
+  <Fragment>
+    {!options?.length && <p class="text-slate-400">Sin opciones disponibles</p>}
+  </Fragment>
 </Fragment>
