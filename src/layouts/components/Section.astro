@@ -1,9 +1,13 @@
 ---
+import { Image } from "astro:assets";
+
+import playIcon from "/public/play.svg";
+
 // const {  } = Astro.props;
 ---
 
 <div class="col-span-9 bg-slate-800 flex flex-col">
-  <div class="flex h-1/2">
+  <div class="flex min-h-[282px] max-h-1/2">
     <div class="bg-inherit m-3 flex flex-col gap-2 w-1/2">
       <header class="bg-slate-700 rounded-md px-3 py-2 font-semibold text-md">
         nombre_tabla <span class="badge badge-success badge-sm font-bold">
@@ -39,7 +43,18 @@
         </table>
       </main>
     </div>
-    <div class="bg-slate-700 w-1/2">Query SQL</div>
+    <div class="bg-inherit m-3 flex flex-col gap-2 w-1/2">
+      <header class="bg-slate-700 rounded-md px-3 py-2 font-semibold text-md">
+        Consultas SQL <button class="btn btn-xs btn-secondary ms-2">
+          <Image src={playIcon} alt="play" class="w-3" />
+          Ejecutar
+        </button>
+      </header>
+      <textarea
+        placeholder="select * from mudanza;"
+        class="textarea textarea-lg h-full resize-none bg-slate-700 focus:outline-none"
+      ></textarea>
+    </div>
   </div>
-  <div class="bg-inherit border-t border-slate-500 h-1/2">Table Result</div>
+  <div class="bg-inherit border-t border-slate-700 h-1/2">Table Result</div>
 </div>
