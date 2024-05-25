@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import playIcon from "/public/play.svg";
+import generateIcon from "/public/file.svg";
 
 // const {  } = Astro.props;
 ---
@@ -56,5 +57,41 @@ import playIcon from "/public/play.svg";
       ></textarea>
     </div>
   </div>
-  <div class="bg-inherit border-t border-slate-700 h-1/2">Table Result</div>
+  <div class="bg-inherit border-t border-slate-700 h-1/2">
+    <!-- Resultados consulta -->
+    <header class="bg-slate-700 rounded-md px-3 py-2 font-semibold text-md m-3">
+      Resultado consulta <button class="btn btn-xs btn-error ms-2">
+        <Image src={generateIcon} alt="generate PDF" class="w-3" />
+        Generar reporte
+      </button>
+    </header>
+    <main class="overflow-y-auto bg-slate-700 rounded-md m-3">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>nombre del atributo</th>
+            <th>tipo de dato</th>
+            <th>es opcional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id_tabla</td>
+            <td>serial</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>nombre_tabla</td>
+            <td>varchar</td>
+            <td>no</td>
+          </tr>
+          <tr>
+            <td>apellido_tabla</td>
+            <td>varchar</td>
+            <td>no</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
 </div>
