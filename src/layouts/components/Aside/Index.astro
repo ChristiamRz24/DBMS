@@ -11,6 +11,7 @@ import BackupDB from "../Modals/BackupDB.astro";
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
 import Check from "../Forms/Check.astro";
+import File from "../Forms/File.astro";
 
 import { Image } from "astro:assets";
 import ChangeDB from "../../ui/ChangeDB.astro";
@@ -46,7 +47,10 @@ import Roles from "./Roles.astro";
       <button class="btn btn-sm btn-primary" onclick="add_role.showModal()">
         Crear rol
       </button>
-      <button class="btn btn-sm btn-primary col-span-2">
+      <button
+        class="btn btn-sm btn-primary col-span-2"
+        onclick="generate_crud.showModal()"
+      >
         Generar CRUD para las entidades
       </button>
     </div>
@@ -55,7 +59,9 @@ import Roles from "./Roles.astro";
       <button class="btn btn-sm btn-outline" onclick="backup_db.showModal()">
         Respaldar
       </button>
-      <button class="btn btn-sm btn-outline">Restaurar</button>
+      <button class="btn btn-sm btn-outline" onclick="restore_db.showModal()">
+        Restaurar
+      </button>
     </div>
     <div class="divider"></div>
     <ChangeDB />
@@ -73,4 +79,12 @@ import Roles from "./Roles.astro";
   <Check label="Permisos" options={["sysdba", "sysoper", "read only"]} />
 </Modal>
 
+<Modal id="generate_crud" type="Generar" title="Generar CRUD">
+  <File label="Script SQL" helpText="Selecciona el script de generación" />
+</Modal>
+
 <BackupDB id="backup_db" />
+
+<Modal id="restore_db" type="Restaurar" title="Restaurar base de datos">
+  <File label="Archivo" helpText="Selecciona el archivo de respaldo" />
+</Modal>
