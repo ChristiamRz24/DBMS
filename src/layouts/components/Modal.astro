@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  type: string;
+  title: string;
+}
+
+const { id, type, title } = Astro.props as Props;
+---
+
+<dialog id={id} class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">{title}</h3>
+    <div class="modal-action w-full mt-0">
+      <button
+        type="button"
+        onclick=`${id}.close()`
+        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+      >
+        ✕ <!-- Close icon -->
+      </button>
+      <form method="dialog" class="flex flex-col gap-3 w-full">
+        <!-- Form fields -->
+        <slot />
+        <!-- Form actions -->
+        <div class="ms-auto">
+          <button type="button" onclick=`${id}.close()` class="btn btn-outline">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-accent">{type}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</dialog>

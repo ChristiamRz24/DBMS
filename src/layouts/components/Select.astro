@@ -1,0 +1,36 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  defaultSelected: string;
+  options: string[] | null;
+}
+
+const { label, value, defaultSelected, options } = Astro.props as Props;
+---
+
+<label class="form-control">
+  <div class="label">
+    <span class="label-text">{label}</span>
+  </div>
+  <select class="select select-bordered focus:outline-none">
+    {
+      !options?.length && (
+        <option disabled selected>
+          No hay opciones disponibles
+        </option>
+      )
+    }
+    {
+      options?.length && (
+        <option disabled selected>{`Selecciona ${defaultSelected}`}</option>
+      )
+    }
+    {
+      options &&
+        options.map((option) => (
+          <option selected={option === value}>{option}</option>
+        ))
+    }
+  </select>
+</label>

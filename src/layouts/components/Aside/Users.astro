@@ -5,6 +5,10 @@ interface Props {
 
 const { pageName } = Astro.props;
 
+import Modal from "../Modal.astro";
+import Input from "../Input.astro";
+import Select from "../Select.astro";
+
 import { Image } from "astro:assets";
 import editIcon from "/public/pencil.svg";
 import deleteIcon from "/public/delete.svg";
@@ -12,7 +16,15 @@ import deleteIcon from "/public/delete.svg";
 import fetchData from "../../../services/fetchData";
 const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
 // const userNames = await fetchData(userNamesURL);
+
 const userNames = [{ usename: "postgres" }];
+const options = [
+  "Sysdba",
+  "Sysoper",
+  "Data Analyst",
+  "Read-Only User",
+  "Backup Operator",
+];
 ---
 
 <!-- [{ usename, usesysid, usecreatedb, usesuper, passwd }] -->
@@ -29,10 +41,16 @@ const userNames = [{ usename: "postgres" }];
           <div class="btn btn-sm flex justify-between group">
             {usename}
             <div class="hidden group-hover:block">
-              <button class="btn btn-accent btn-xs">
+              <button
+                class="btn btn-accent btn-xs"
+                onclick="edit_user.showModal()"
+              >
                 <Image src={editIcon} alt="Edit" class="w-4" />
               </button>
-              <button class="btn btn-accent btn-xs">
+              <button
+                class="btn btn-accent btn-xs"
+                onclick="delete_user.showModal()"
+              >
                 <Image src={deleteIcon} alt="Delete" class="w-4" />
               </button>
             </div>
@@ -46,3 +64,15 @@ const userNames = [{ usename: "postgres" }];
     }
   </div>
 </div>
+
+<Modal id="edit_user" type="Editar" title="Editar usuario">
+  <Input type="text" label="Nombre" value="" example="christiam" />
+  <Input type="password" label="Contraseña" value="" example="P@ssw0rd" />
+  <Select value="" label="Rol" defaultSelected="un rol" options={[]} />
+</Modal>
+
+<Modal id="delete_user" type="Eliminar" title="Eliminar usuario">
+  <p class="my-3">
+    ¿Está seguro que desea eliminar el usuario<strong>postgres</strong>?
+  </p>
+</Modal>

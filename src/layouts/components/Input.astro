@@ -1,0 +1,30 @@
+---
+import { HTMLAttributes } from "astro/types";
+
+interface Props {
+  label: string;
+  example: string;
+  value: string;
+  type: HTMLAttributes<"input">["type"];
+}
+
+const { label, example, value, type } = Astro.props as Props;
+---
+
+<label class="form-control">
+  <div class="label">
+    <span class="label-text">{label}</span>
+  </div>
+  <input
+    required
+    type={type}
+    value={value}
+    class="input input-bordered w-full focus:outline-none"
+  />
+  <div class="label">
+    <span class="label-text-alt text-sm text-slate-500">
+      <span class="font-semibold">Ejemplo:</span>
+      {example}
+    </span>
+  </div>
+</label>
