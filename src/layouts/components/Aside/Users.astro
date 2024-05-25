@@ -5,20 +5,38 @@ interface Props {
 
 const { pageName } = Astro.props;
 
+import { Image } from "astro:assets";
+import editIcon from "/public/pencil.svg";
+import deleteIcon from "/public/delete.svg";
+
 import fetchData from "../../../services/fetchData";
 const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
-const userNames = await fetchData(userNamesURL);
+// const userNames = await fetchData(userNamesURL);
+const userNames = [{ usename: "postgres" }];
 ---
 
 <!-- [{ usename, usesysid, usecreatedb, usesuper, passwd }] -->
-<div tabindex="2" class="collapse collapse-arrow bg-slate-800 rounded-md">
+<div
+  tabindex="2"
+  class="collapse collapse-open collapse-arrow bg-slate-800 rounded-md"
+>
   <input type="checkbox" class="peer" />
   <div class="collapse-title font-medium">Usuarios</div>
   <div class="collapse-content flex flex-col gap-1">
     {
       userNames &&
         userNames.map(({ usename }) => (
-          <button class="btn btn-sm justify-start">{usename}</button>
+          <div class="btn btn-sm flex justify-between group">
+            {usename}
+            <div class="hidden group-hover:block">
+              <button class="btn btn-accent btn-xs">
+                <Image src={editIcon} alt="Edit" class="w-4" />
+              </button>
+              <button class="btn btn-accent btn-xs">
+                <Image src={deleteIcon} alt="Delete" class="w-4" />
+              </button>
+            </div>
+          </div>
         ))
     }
     {
