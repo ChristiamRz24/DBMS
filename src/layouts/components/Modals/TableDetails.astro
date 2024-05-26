@@ -1,0 +1,87 @@
+---
+interface Attributes {
+  name: string;
+  type: string;
+  optional: boolean;
+}
+
+interface Props {
+  id: string;
+  table: string;
+  pageName: string;
+}
+
+const { id, table = "Tabla", pageName }: Props = Astro.props;
+
+const attributes = [
+  {
+    name: "id",
+    type: "integer",
+    optional: false,
+  },
+  {
+    name: "nombre",
+    type: "string",
+    optional: false,
+  },
+  {
+    name: "descripcion",
+    type: "string",
+    optional: false,
+  },
+  {
+    name: "created_at",
+    type: "datetime",
+    optional: false,
+  },
+  {
+    name: "updated_at",
+    type: "datetime",
+    optional: false,
+  },
+];
+---
+
+<dialog id={id} class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <header class="bg-slate-700 rounded-md px-3 py-2 font-semibold text-md">
+      {table}
+      <span class="badge badge-success badge-sm font-bold"> detalles </span>
+    </header>
+    <div class="flex flex-col mt-2 w-full">
+      <!-- Table -->
+      <main class="overflow-y-auto bg-slate-700 rounded-md">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>nombre del atributo</th>
+              <th>tipo de dato</th>
+              <th>es opcional</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              attributes &&
+                attributes.map(({ name, type, optional }) => (
+                  <tr>
+                    <td>{name}</td>
+                    <td>{type}</td>
+                    <td>{optional ? "si" : "no"}</td>
+                  </tr>
+                ))
+            }
+          </tbody>
+        </table>
+      </main>
+      <div class="ms-auto mt-2">
+        <button
+          type="button"
+          onclick=`${id}.close()`
+          class="btn btn-sm btn-accent"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>

@@ -5,19 +5,36 @@ interface Props {
 
 const { pageName } = Astro.props;
 
+import TableDetails from "../Modals/TableDetails.astro";
+
 import fetchData from "../../../services/fetchData";
 const tableNamesURL = `http://localhost:4321/api/${pageName}/tables/names.json`;
 const tableNames = await fetchData(tableNamesURL);
 ---
 
-<div tabindex="1" class="collapse collapse-arrow bg-slate-800 rounded-md">
+<div
+  tabindex="1"
+  class="collapse collapse-open collapse-arrow bg-slate-800 rounded-md"
+>
   <input type="checkbox" class="peer" />
   <div class="collapse-title font-medium">Entidades</div>
   <div class="collapse-content flex flex-col gap-1">
     {
       tableNames &&
         tableNames.map(({ table_name }) => (
-          <button class="btn btn-sm justify-start">{table_name}</button>
+          <>
+            <button
+              class="btn btn-sm justify-start"
+              onclick={`show_${table_name}_details.showModal()`}
+            >
+              {table_name}
+            </button>
+            <TableDetails
+              table={table_name}
+              pageName={pageName}
+              id={`show_${table_name}_details`}
+            />
+          </>
         ))
     }
     {
