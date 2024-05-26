@@ -20,6 +20,10 @@ import databaseIcon from "/public/database.svg";
 import Tables from "./Tables.astro";
 import Users from "./Users.astro";
 import Roles from "./Roles.astro";
+
+const test = () => {
+  console.log("test");
+};
 ---
 
 <aside
@@ -74,7 +78,7 @@ import Roles from "./Roles.astro";
   <Select label="Rol" defaultSelected="un rol" options={[]} />
 </Modal>
 
-<Modal id="add_role" type="Crear" title="Crear rol">
+<Modal id="add_role" type="Crear" title="Crear rol" onSubmit={test}>
   <Input type="text" label="Nombre" example="admin" />
   <Check label="Permisos" options={["sysdba", "sysoper", "read only"]} />
 </Modal>
