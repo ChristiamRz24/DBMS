@@ -1,10 +1,4 @@
 ---
-interface Attributes {
-  name: string;
-  type: string;
-  optional: boolean;
-}
-
 interface Props {
   id: string;
   table: string;
@@ -13,33 +7,9 @@ interface Props {
 
 const { id, table = "Tabla", pageName }: Props = Astro.props;
 
-const attributes = [
-  {
-    name: "id",
-    type: "integer",
-    optional: false,
-  },
-  {
-    name: "nombre",
-    type: "string",
-    optional: false,
-  },
-  {
-    name: "descripcion",
-    type: "string",
-    optional: false,
-  },
-  {
-    name: "created_at",
-    type: "datetime",
-    optional: false,
-  },
-  {
-    name: "updated_at",
-    type: "datetime",
-    optional: false,
-  },
-];
+import fetchData from "../../../services/fetchData";
+const attributesURL = `http://localhost:4321/api/${pageName}/tables/attributes/${table}.json`;
+const attributes = await fetchData(attributesURL);
 ---
 
 <dialog id={id} class="modal modal-bottom sm:modal-middle">
