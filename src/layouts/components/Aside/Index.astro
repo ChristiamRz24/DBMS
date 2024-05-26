@@ -6,6 +6,7 @@ interface Props {
 const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
+import ModalReact from "../Modals/React.jsx";
 import BackupDB from "../Modals/BackupDB.astro";
 
 import Input from "../Forms/Input.astro";
@@ -78,10 +79,10 @@ const test = () => {
   <Select label="Rol" defaultSelected="un rol" options={[]} />
 </Modal>
 
-<Modal id="add_role" type="Crear" title="Crear rol" onSubmit={test}>
+<ModalReact id="add_role" type="Crear" title="Crear rol" onSubmit={test}>
   <Input type="text" label="Nombre" example="admin" />
   <Check label="Permisos" options={["sysdba", "sysoper", "read only"]} />
-</Modal>
+</ModalReact>
 
 <Modal id="generate_crud" type="Generar" title="Generar CRUD">
   <File label="Script SQL" helpText="Selecciona el script de generación" />
