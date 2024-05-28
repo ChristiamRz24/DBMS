@@ -1,21 +1,27 @@
 import React, { useRef } from "react";
 import postData from "../../../services/postData";
 
-const AddRole = ({ id, type, title, pageName, children }) => {
+const BaseAddModal = ({ id, type, dataType, pageName, lastURL, children }) => {
   const dialogREF = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const role = new FormData(event.target);
-    const addRoleURL = `http://localhost:4321/api/${pageName}/roles/add.json`;
+    const data = new FormData(event.target);
+    console.log(Object.fromEntries(data));
+
+    const baseURL = `http://localhost:4321/api/${pageName}/${lastURL}`;
+    console.log(baseURL);
 
     try {
-      // response = Role created | Role already exists
-      const response = await postData(addRoleURL, role);
+      // response = Data created | Data already exists
+      const response = await postData(baseURL, data);
+      console.log(response);
 
-      if (response.message === "Role created") location.reload();
-      if (response.message === "Role already exists") alert("El rol ya existe");
+      if (response.message === "created") location.reload();
+      if (response.message === "already exists") {
+        alert(`El ${dataType} ya existe`);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +38,9 @@ const AddRole = ({ id, type, title, pageName, children }) => {
       className="modal modal-bottom sm:modal-middle"
     >
       <div className="modal-box">
-        <h3 className="font-bold text-lg">{title}</h3>
+        <h3 className="font-bold text-lg">
+          {type} {dataType}
+        </h3>
         <div className="modal-action w-full mt-0">
           <button
             type="button"
@@ -68,4 +76,4 @@ const AddRole = ({ id, type, title, pageName, children }) => {
   );
 };
 
-export default AddRole;
+export default BaseAddModal;

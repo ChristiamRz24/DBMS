@@ -12,7 +12,7 @@ export const POST = async ({ request }) => {
   const rows = await client.query(roleExists);
 
   if (rows.length > 0) {
-    return new Response(JSON.stringify({ message: "Role already exists" }), {
+    return new Response(JSON.stringify({ message: "already exists" }), {
       status: 400,
     });
   }
@@ -37,7 +37,7 @@ export const POST = async ({ request }) => {
 
   try {
     await client.query(query);
-    return new Response(JSON.stringify({ message: "Role created" }));
+    return new Response(JSON.stringify({ message: "created" }));
   } catch (err) {
     return new Response(JSON.stringify(err.message));
   }

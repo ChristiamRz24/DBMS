@@ -6,7 +6,8 @@ interface Props {
 const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
-import AddRole from "../Modals/AddRole.jsx";
+// import AddRole from "../Modals/AddRole.jsx";
+import BaseAddModal from "../Modals/BaseAddModal.jsx";
 import BackupDB from "../Modals/BackupDB.astro";
 
 import Input from "../Forms/Input.astro";
@@ -85,11 +86,12 @@ const roleNames = await fetchData(roleNamesURL);
   />
 </Modal>
 
-<AddRole
+<BaseAddModal
   id="add_role"
   type="Crear"
-  title="Crear rol"
+  dataType="rol"
   pageName={pageName}
+  lastURL="roles/add.json"
   client:only="react"
 >
   <Input type="text" name="name" label="Nombre" example="admin" />
@@ -101,7 +103,7 @@ const roleNames = await fetchData(roleNamesURL);
       { name: "Básicos: CRUD", value: "crud" },
     ]}
   />
-</AddRole>
+</BaseAddModal>
 
 <Modal id="generate_crud" type="Generar" title="Generar CRUD">
   <File label="Script SQL" helpText="Selecciona el script de generación" />
