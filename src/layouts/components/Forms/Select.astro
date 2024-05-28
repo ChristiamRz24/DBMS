@@ -14,7 +14,11 @@ const { name, label, value, defaultSelected, options } = Astro.props;
   <div class="label">
     <span class="label-text">{label}</span>
   </div>
-  <select name={name} class="select select-bordered focus:outline-none">
+  <select
+    required
+    name={name}
+    class="select select-bordered focus:outline-none"
+  >
     {
       !options?.length && (
         <option disabled selected>

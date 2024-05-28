@@ -1,9 +1,10 @@
 ---
 interface Props {
   pageName: string;
+  roleNames: string[] | undefined;
 }
 
-const { pageName } = Astro.props;
+const { pageName, roleNames } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
 import Input from "../Forms/Input.astro";
@@ -15,16 +16,7 @@ import deleteIcon from "/public/delete.svg";
 
 import fetchData from "../../../services/fetchData";
 const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
-// const userNames = await fetchData(userNamesURL);
-
-const userNames = [{ usename: "postgres" }];
-const options = [
-  "Sysdba",
-  "Sysoper",
-  "Data Analyst",
-  "Read-Only User",
-  "Backup Operator",
-];
+const userNames = await fetchData(userNamesURL);
 ---
 
 <!-- [{ usename, usesysid, usecreatedb, usesuper, passwd }] -->
@@ -63,9 +55,15 @@ const options = [
 </div>
 
 <Modal id="edit_user" type="Editar" title="Editar usuario">
-  <Input type="text" label="Nombre" value="" example="christiam" />
-  <Input type="password" label="Contraseña" value="" example="P@ssw0rd" />
-  <Select value="" label="Rol" defaultSelected="un rol" options={[]} />
+  <Input type="text" name="name" label="Nombre" example="christiam" />
+  <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
+  <Select
+    name="role"
+    label="Rol"
+    value="rolname"
+    defaultSelected="un rol"
+    options={roleNames}
+  />
 </Modal>
 
 <Modal id="delete_user" type="Eliminar" title="Eliminar usuario">
