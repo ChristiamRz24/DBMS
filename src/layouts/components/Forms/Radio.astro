@@ -1,10 +1,16 @@
 ---
-interface Props {
-  label: string;
-  options: string[] | null;
+interface Option {
+  name: string;
+  value: string;
 }
 
-const { label, options } = Astro.props as Props;
+interface Props {
+  name: string;
+  label: string;
+  options: Option[] | null;
+}
+
+const { name, label, options } = Astro.props;
 ---
 
 <Fragment>
@@ -13,10 +19,15 @@ const { label, options } = Astro.props as Props;
     options && (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {options.map((option) => (
-          <div class="form-control flex items-start">
+          <div class="form-control mb-3">
             <label class="label cursor-pointer">
-              <span class="label-text">{option}</span>
-              <input type="checkbox" class="toggle ms-3" />
+              <span class="label-text">{option.name}</span>
+              <input
+                type="radio"
+                name={name}
+                value={option.value}
+                class="radio checked:bg-blue-500"
+              />
             </label>
           </div>
         ))}
