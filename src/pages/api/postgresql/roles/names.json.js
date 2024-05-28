@@ -2,7 +2,7 @@ import { client } from "../../../../databases/postgresql/client";
 
 export const GET = async () => {
   const query = `
-    SELECT * FROM pg_roles
+    SELECT rolname FROM pg_roles
     WHERE rolname NOT SIMILAR TO 'pg_%|postgres';
   `;
 

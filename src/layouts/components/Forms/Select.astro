@@ -2,9 +2,9 @@
 interface Props {
   name: string;
   label: string;
-  value?: string;
+  value: string;
   defaultSelected: string;
-  options: string[] | null;
+  options: string[] | undefined;
 }
 
 const { name, label, value, defaultSelected, options } = Astro.props;
@@ -30,8 +30,8 @@ const { name, label, value, defaultSelected, options } = Astro.props;
     {
       options &&
         options.map((option) => (
-          <option value={value} selected={option === value}>
-            {option}
+          <option value={option[value]} selected={option === option[value]}>
+            {option[value]}
           </option>
         ))
     }

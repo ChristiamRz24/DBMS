@@ -21,6 +21,10 @@ import databaseIcon from "/public/database.svg";
 import Tables from "./Tables.astro";
 import Users from "./Users.astro";
 import Roles from "./Roles.astro";
+
+import fetchData from "../../../services/fetchData";
+const roleNamesURL = `http://localhost:4321/api/${pageName}/roles/names.json`;
+const roleNames = await fetchData(roleNamesURL);
 ---
 
 <aside
@@ -37,7 +41,7 @@ import Roles from "./Roles.astro";
   <main class="flex flex-col gap-2">
     <Tables pageName={pageName} />
     <Users pageName={pageName} />
-    <Roles pageName={pageName} />
+    <Roles roleNames={roleNames} />
   </main>
   <div class="divider"></div>
   <footer>
@@ -72,7 +76,13 @@ import Roles from "./Roles.astro";
 <Modal id="add_user" type="Crear" title="Crear usuario">
   <Input type="text" name="name" label="Nombre" example="christiam" />
   <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
-  <Select name="role" label="Rol" defaultSelected="un rol" options={[]} />
+  <Select
+    name="role"
+    label="Rol"
+    value="rolname"
+    defaultSelected="un rol"
+    options={roleNames}
+  />
 </Modal>
 
 <AddRole

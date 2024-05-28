@@ -1,13 +1,13 @@
 ---
-interface Props {
-  pageName: string;
+interface RoleName {
+  rolname: string;
 }
 
-const { pageName } = Astro.props;
+interface Props {
+  roleNames: RoleName[];
+}
 
-import fetchData from "../../../services/fetchData";
-const roleNamesURL = `http://localhost:4321/api/${pageName}/roles/names.json`;
-const roleNames = await fetchData(roleNamesURL);
+const { roleNames } = Astro.props;
 ---
 
 <div tabindex="3" class="collapse collapse-arrow bg-slate-800 rounded-md">
