@@ -6,7 +6,6 @@ interface Props {
 const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
-// import AddRole from "../Modals/AddRole.jsx";
 import BaseAddModal from "../Modals/BaseAddModal.jsx";
 import BackupDB from "../Modals/BackupDB.astro";
 
@@ -41,7 +40,7 @@ const roleNames = await fetchData(roleNamesURL);
   </header>
   <main class="flex flex-col gap-2">
     <Tables pageName={pageName} />
-    <Users pageName={pageName} />
+    <Users pageName={pageName} roleNames={roleNames}/>
     <Roles roleNames={roleNames} />
   </main>
   <div class="divider"></div>
@@ -74,7 +73,14 @@ const roleNames = await fetchData(roleNamesURL);
   </footer>
 </aside>
 
-<Modal id="add_user" type="Crear" title="Crear usuario">
+<BaseAddModal
+  id="add_user"
+  type="Crear"
+  dataType="usuario"
+  pageName={pageName}
+  lastURL="users/add.json"
+  client:only="react"
+>
   <Input type="text" name="name" label="Nombre" example="christiam" />
   <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
   <Select
@@ -84,7 +90,7 @@ const roleNames = await fetchData(roleNamesURL);
     defaultSelected="un rol"
     options={roleNames}
   />
-</Modal>
+</BaseAddModal>
 
 <BaseAddModal
   id="add_role"
