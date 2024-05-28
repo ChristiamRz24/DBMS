@@ -3,10 +3,9 @@ interface Props {
   id: string;
   type: string;
   title: string;
-  onSubmit?: () => void;
 }
 
-const { id, type, title, onSubmit } = Astro.props;
+const { id, type, title } = Astro.props;
 ---
 
 <dialog id={id} class="modal modal-bottom sm:modal-middle">
@@ -40,23 +39,3 @@ const { id, type, title, onSubmit } = Astro.props;
     </div>
   </div>
 </dialog>
-
-<script is:inline define:vars={{ id, onSubmit }}>
-  const dialog = window.document.getElementById(id);
-  const form = window.document.getElementById(`Form-${id}`);
-
-  if (!dialog) throw new Error(`Dialog is not found`);
-  if (!form) throw new Error(`Form is not found`);
-
-  form.addEventListener("submit", handleSubmit);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log("Form submitted");
-
-    // Call the passed function
-    if (onSubmit) () => onSubmit();
-
-    dialog.close();
-  }
-</script>

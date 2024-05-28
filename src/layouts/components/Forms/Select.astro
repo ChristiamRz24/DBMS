@@ -1,19 +1,20 @@
 ---
 interface Props {
+  name: string;
   label: string;
   value?: string;
   defaultSelected: string;
   options: string[] | null;
 }
 
-const { label, value, defaultSelected, options } = Astro.props as Props;
+const { name, label, value, defaultSelected, options } = Astro.props;
 ---
 
 <label class="form-control">
   <div class="label">
     <span class="label-text">{label}</span>
   </div>
-  <select class="select select-bordered focus:outline-none">
+  <select name={name} class="select select-bordered focus:outline-none">
     {
       !options?.length && (
         <option disabled selected>
@@ -29,7 +30,9 @@ const { label, value, defaultSelected, options } = Astro.props as Props;
     {
       options &&
         options.map((option) => (
-          <option selected={option === value}>{option}</option>
+          <option value={value} selected={option === value}>
+            {option}
+          </option>
         ))
     }
   </select>
