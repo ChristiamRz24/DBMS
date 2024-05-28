@@ -1,12 +1,25 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
+import postData from "../../../services/postData";
 
-const ModalReact = ({ id, type, title, onSubmit, children }) => {
+const AddRole = ({ id, type, title, pageName, children }) => {
   const dialogREF = useRef(null);
-  const formREF = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSubmit();
+
+    const role = new FormData(event.target);
+    const addRoleURL = `http://localhost:4321/api/${pageName}/roles/add.json`;
+
+    try {
+      // response = Role created | Role already exists
+      const response = await postData(addRoleURL, role);
+
+      if (response.message === "Role created") location.reload();
+      if (response.message === "Role already exists") alert("El rol ya existe");
+    } catch (error) {
+      console.error(error);
+    }
+
     handleCloseDialog();
   };
 
@@ -29,7 +42,6 @@ const ModalReact = ({ id, type, title, onSubmit, children }) => {
             X {/* Close icon */}
           </button>
           <form
-            ref={formREF}
             method="dialog"
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 w-full"
@@ -56,4 +68,4 @@ const ModalReact = ({ id, type, title, onSubmit, children }) => {
   );
 };
 
-export default ModalReact;
+export default AddRole;

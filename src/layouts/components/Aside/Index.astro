@@ -6,12 +6,12 @@ interface Props {
 const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
-import ModalReact from "../Modals/React.jsx";
+import AddRole from "../Modals/AddRole.jsx";
 import BackupDB from "../Modals/BackupDB.astro";
 
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
-import Check from "../Forms/Check.astro";
+import Radio from "../Forms/Radio.astro";
 import File from "../Forms/File.astro";
 
 import { Image } from "astro:assets";
@@ -21,10 +21,6 @@ import databaseIcon from "/public/database.svg";
 import Tables from "./Tables.astro";
 import Users from "./Users.astro";
 import Roles from "./Roles.astro";
-
-const test = () => {
-  console.log("test");
-};
 ---
 
 <aside
@@ -74,15 +70,28 @@ const test = () => {
 </aside>
 
 <Modal id="add_user" type="Crear" title="Crear usuario">
-  <Input type="text" label="Nombre" example="christiam" />
-  <Input type="password" label="Contraseña" example="P@ssw0rd" />
-  <Select label="Rol" defaultSelected="un rol" options={[]} />
+  <Input type="text" name="name" label="Nombre" example="christiam" />
+  <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
+  <Select name="role" label="Rol" defaultSelected="un rol" options={[]} />
 </Modal>
 
-<ModalReact id="add_role" type="Crear" title="Crear rol" onSubmit={test}>
-  <Input type="text" label="Nombre" example="admin" />
-  <Check label="Permisos" options={["sysdba", "sysoper", "read only"]} />
-</ModalReact>
+<AddRole
+  id="add_role"
+  type="Crear"
+  title="Crear rol"
+  pageName={pageName}
+  client:only="react"
+>
+  <Input type="text" name="name" label="Nombre" example="admin" />
+  <Radio
+    name="permissions"
+    label="Permisos"
+    options={[
+      { name: "Solo lectura", value: "read" },
+      { name: "Básicos: CRUD", value: "crud" },
+    ]}
+  />
+</AddRole>
 
 <Modal id="generate_crud" type="Generar" title="Generar CRUD">
   <File label="Script SQL" helpText="Selecciona el script de generación" />
