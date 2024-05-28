@@ -6,6 +6,7 @@ interface Props {
 
 const { pageName, roleNames } = Astro.props;
 
+import DeleteModal from "../Modals/DeleteModal.jsx";
 import Modal from "../Modals/BaseModal.astro";
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
@@ -27,23 +28,39 @@ const userNames = await fetchData(userNamesURL);
     {
       userNames &&
         userNames.map(({ usename }) => (
-          <div class="btn btn-sm flex justify-between group">
-            {usename}
-            <div class="hidden group-hover:block">
-              <button
-                class="btn btn-accent btn-xs"
-                onclick="edit_user.showModal()"
-              >
-                <Image src={editIcon} alt="Edit" class="w-4" />
-              </button>
-              <button
-                class="btn btn-accent btn-xs"
-                onclick="delete_user.showModal()"
-              >
-                <Image src={deleteIcon} alt="Delete" class="w-4" />
-              </button>
+          <>
+            <div class="btn btn-sm flex justify-between group">
+              {usename}
+              <div class="hidden group-hover:block">
+                <button
+                  class="btn btn-accent btn-xs"
+                  onclick="edit_user.showModal()"
+                >
+                  <Image src={editIcon} alt="Edit" class="w-4" />
+                </button>
+                <button
+                  class="btn btn-accent btn-xs"
+                  onclick={`delete_user_${usename}.showModal()`}
+                >
+                  <Image src={deleteIcon} alt="Delete" class="w-4" />
+                </button>
+              </div>
             </div>
-          </div>
+            <DeleteModal
+              type="Eliminar"
+              dataType="usuario"
+              username={usename}
+              pageName={pageName}
+              lastURL="users/delete.json"
+              id={`delete_user_${usename}`}
+              client:only="react"
+            >
+              <p class="my-3">
+                ¿Está seguro que desea eliminar el usuario
+                <strong>{usename}</strong>?
+              </p>
+            </DeleteModal>
+          </>
         ))
     }
     {
@@ -64,10 +81,4 @@ const userNames = await fetchData(userNamesURL);
     defaultSelected="un rol"
     options={roleNames}
   />
-</Modal>
-
-<Modal id="delete_user" type="Eliminar" title="Eliminar usuario">
-  <p class="my-3">
-    ¿Está seguro que desea eliminar el usuario <strong>postgres</strong>?
-  </p>
 </Modal>
