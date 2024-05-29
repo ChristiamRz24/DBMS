@@ -7,7 +7,7 @@ const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
 import BaseAddModal from "../Modals/BaseAddModal.jsx";
-import BackupDB from "../Modals/BackupDB.astro";
+import BackupDB from "../Modals/BackupDB.jsx";
 
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
@@ -40,7 +40,7 @@ const roleNames = await fetchData(roleNamesURL);
   </header>
   <main class="flex flex-col gap-2">
     <Tables pageName={pageName} />
-    <Users pageName={pageName} roleNames={roleNames}/>
+    <Users pageName={pageName} roleNames={roleNames} />
     <Roles roleNames={roleNames} />
   </main>
   <div class="divider"></div>
@@ -115,7 +115,7 @@ const roleNames = await fetchData(roleNamesURL);
   <File label="Script SQL" helpText="Selecciona el script de generación" />
 </Modal>
 
-<BackupDB id="backup_db" />
+<BackupDB id="backup_db" pageName={pageName} client:only="react" />
 
 <Modal id="restore_db" type="Restaurar" title="Restaurar base de datos">
   <File label="Archivo" helpText="Selecciona el archivo de respaldo" />
