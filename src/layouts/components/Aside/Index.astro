@@ -7,12 +7,13 @@ const { pageName } = Astro.props;
 
 import Modal from "../Modals/BaseModal.astro";
 import BaseAddModal from "../Modals/BaseAddModal.jsx";
+import RestoreDB from "../Modals/RestoreDB.jsx";
 import BackupDB from "../Modals/BackupDB.jsx";
 
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
 import Radio from "../Forms/Radio.astro";
-import File from "../Forms/File.astro";
+import File from "../Forms/File.jsx";
 
 import { Image } from "astro:assets";
 import ChangeDB from "../../ui/ChangeDB.astro";
@@ -112,11 +113,19 @@ const roleNames = await fetchData(roleNamesURL);
 </BaseAddModal>
 
 <Modal id="generate_crud" type="Generar" title="Generar CRUD">
-  <File label="Script SQL" helpText="Selecciona el script de generación" />
+  <!-- <File
+    id="file"
+    name="file"
+    reference={fileRef}
+    onChange={handleFileChange}
+    helpText="Solo archivos .sql"
+    label="Selecciona un archivo de respaldo"
+    client:only="react"
+  /> -->
 </Modal>
 
 <BackupDB id="backup_db" pageName={pageName} client:only="react" />
 
-<Modal id="restore_db" type="Restaurar" title="Restaurar base de datos">
-  <File label="Archivo" helpText="Selecciona el archivo de respaldo" />
-</Modal>
+<RestoreDB id="restore_db" pageName={pageName} client:only="react" />
+<!-- <File label="Archivo" helpText="Selecciona el archivo de respaldo" /> -->
+<!-- </RestoreDB> -->
