@@ -43,5 +43,5 @@ Este proyecto está construido utilizando varias tecnologías clave. A continuac
 
 6. TODOs:  
   [ ] Usar Docker para la configuración de las bases de datos  
-  [ ] Realizar un diseño de la aplicación final  
+  [x] Realizar un diseño de la aplicación final  
   [ ] Integrar Oracle a las bases de datos soportadas
