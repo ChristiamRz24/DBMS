@@ -3,11 +3,14 @@ interface Props {
   name: string;
   label: string;
   value: string;
+  selected?: string;
   defaultSelected: string;
   options: string[] | undefined;
 }
 
-const { name, label, value, defaultSelected, options } = Astro.props;
+const { name, label, value, selected, defaultSelected, options } = Astro.props;
+
+const optionSelected = options?.find((option) => option[value] === selected);
 ---
 
 <label class="form-control">
@@ -34,7 +37,7 @@ const { name, label, value, defaultSelected, options } = Astro.props;
     {
       options &&
         options.map((option) => (
-          <option value={option[value]} selected={option === option[value]}>
+          <option value={option[value]} selected={option === optionSelected}>
             {option[value]}
           </option>
         ))

@@ -7,7 +7,7 @@ interface Props {
 const { pageName, roleNames } = Astro.props;
 
 import DeleteModal from "../Modals/DeleteModal.jsx";
-import Modal from "../Modals/BaseModal.astro";
+import EditModal from "../Modals/EditModal.jsx";
 import Input from "../Forms/Input.astro";
 import Select from "../Forms/Select.astro";
 
@@ -20,21 +20,20 @@ const userNamesURL = `http://localhost:4321/api/${pageName}/users/names.json`;
 const userNames = await fetchData(userNamesURL);
 ---
 
-<!-- [{ usename, usesysid, usecreatedb, usesuper, passwd }] -->
 <div tabindex="2" class="collapse collapse-arrow bg-slate-800 rounded-md">
   <input type="checkbox" class="peer" />
   <div class="collapse-title font-medium">Usuarios</div>
   <div class="collapse-content flex flex-col gap-1">
     {
       userNames &&
-        userNames.map(({ usename }) => (
+        userNames.map(({ usename, role }) => (
           <>
             <div class="btn btn-sm flex justify-between group">
               {usename}
               <div class="hidden group-hover:block">
                 <button
                   class="btn btn-accent btn-xs"
-                  onclick="edit_user.showModal()"
+                  onclick={`update_user_${usename}.showModal()`}
                 >
                   <Image src={editIcon} alt="Edit" class="w-4" />
                 </button>
@@ -60,6 +59,37 @@ const userNames = await fetchData(userNamesURL);
                 <strong>{usename}</strong>?
               </p>
             </DeleteModal>
+            <EditModal
+              type="Actualizar"
+              dataType="usuario"
+              pageName={pageName}
+              oldData={{ usename, role }}
+              id={`update_user_${usename}`}
+              lastURL="users/update.json"
+              client:only="react"
+            >
+              <Input
+                type="text"
+                name="newName"
+                value={usename}
+                label="Nombre"
+                example="christiam"
+              />
+              <Input
+                type="password"
+                name="passwd"
+                label="Contraseña"
+                example="P@ssw0rd"
+              />
+              <Select
+                name="newRole"
+                label="Rol"
+                value="rolname"
+                selected={role}
+                defaultSelected="un rol"
+                options={roleNames}
+              />
+            </EditModal>
           </>
         ))
     }
@@ -70,15 +100,3 @@ const userNames = await fetchData(userNamesURL);
     }
   </div>
 </div>
-
-<Modal id="edit_user" type="Editar" title="Editar usuario">
-  <Input type="text" name="name" label="Nombre" example="christiam" />
-  <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
-  <Select
-    name="role"
-    label="Rol"
-    value="rolname"
-    defaultSelected="un rol"
-    options={roleNames}
-  />
-</Modal>
