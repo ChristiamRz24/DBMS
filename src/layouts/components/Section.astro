@@ -58,10 +58,7 @@ const { pageName } = Astro.props;
 
   btnEjecutar.addEventListener("click", async () => {
     const query = textarea.value;
-    console.log(query);
-
     await fetchReport(query);
-    console.log("queryResult:", queryResult);
 
     if (queryResult.length !== 0) {
       btnGenerarReporte.classList.remove("btn-disabled");
@@ -133,4 +130,25 @@ const { pageName } = Astro.props;
       tbody.appendChild(tr);
     });
   };
+
+  btnGenerarReporte.addEventListener("click", () => {
+    const formData = new FormData();
+    formData.append("html", table.innerHTML);
+    formData.append("query", textarea.value);
+
+    fetch(`/api/pdf/generate.json`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.fileName) {
+          // crear un enlace de descarga
+          const a = document.createElement("a");
+          a.href = `/files/${data.fileName}`;
+          a.download = data.fileName;
+          a.click();
+        }
+      });
+  });
 </script>
