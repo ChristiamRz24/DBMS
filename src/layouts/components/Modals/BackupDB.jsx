@@ -10,32 +10,26 @@ const BackupDB = ({ id, pageName }) => {
     setIsBackup(false);
   };
 
-  console.log(isBackup);
   if (isBackup) {
     fetch("/api/postgresql/files/backup.json")
-      .then(async (response) => {
-        let filename = response.headers
-          .get("Content-Disposition")
-          .split("=")[1];
+      .then((response) => response.json())
+      .then((data) => {
+        // obtener el nombre del archivo de respaldo
+        const { fileName } = data;
 
-        // Quitar comillas alrededor del nombre del archivo, si las hay
-        filename = filename.replace(/"/g, "");
-
-        console.log("filename:", filename);
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        // crear un enlace de descarga
         const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
+        a.href = `/files/${fileName}`;
+        console.log("a.href:", a.href);
+        a.download = fileName;
         a.click();
-        window.URL.revokeObjectURL(url);
+
         handleCloseDialog();
 
         alert(`Base de datos ${pageName} respaldada con éxito!`);
       })
       .catch((error) => {
         console.error("Error:", error);
-        setIsBackup(false);
       });
   }
 

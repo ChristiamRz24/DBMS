@@ -1,6 +1,7 @@
-import { exec } from "child_process";
 import path from "path";
 import fs from "fs/promises";
+
+import { exec } from "child_process";
 
 // Definir el directorio de respaldo
 const backupDir = path.join(process.cwd(), "public", "files");
@@ -24,8 +25,8 @@ const generateBackup = (fullFilePath) => {
           console.error("Error:", error);
           reject(error);
         } else {
-          console.log("stdout:", stdout);
-          console.error("stderr:", stderr);
+          if (stdout) console.log("stdout:", stdout);
+          if (stderr) console.log("stderr:", stderr);
           resolve(fullFilePath);
         }
       },
@@ -40,20 +41,17 @@ export const GET = async () => {
     const fileName = `${database}-backup-${date}.sql`;
     const fullFilePath = path.join(backupDir, fileName);
 
-    const backupFile = await generateBackup(fullFilePath);
-    const stats = await fs.stat(backupFile);
+    await generateBackup(fullFilePath); // Generar el respaldo
 
-    return new Response(await fs.readFile(backupFile), {
-      headers: {
-        "Content-Disposition": `attachment; filename="${fileName}"`,
-        "Content-Length": stats.size,
-        "Content-Type": "application/octet-stream",
-      },
+    // Devolver solo el nombre del archivo de respaldo
+    return new Response(JSON.stringify({ fileName }), {
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("Error:", error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
+      headers: { "Content-Type": "application/json" },
     });
   }
 };
