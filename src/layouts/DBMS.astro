@@ -9,5 +9,5 @@ const { pageName } = Astro.props;
 
 <main class="flex min-h-svh">
   <Aside pageName={pageName} />
-  <Section />
+  <Section pageName={pageName} client:load />
 </main>
