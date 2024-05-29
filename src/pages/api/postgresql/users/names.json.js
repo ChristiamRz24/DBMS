@@ -2,8 +2,9 @@ import { client } from "../../../../databases/postgresql/client";
 
 export const GET = async () => {
   const query = `
-    SELECT usename, usesysid, usecreatedb, usesuper, passwd
-    FROM pg_user;
+    SELECT u.usename, g.groname AS role
+    FROM pg_user u
+    JOIN pg_group g ON u.usesysid = ANY(g.grolist);
   `;
 
   try {
