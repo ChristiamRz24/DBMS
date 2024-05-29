@@ -1,4 +1,4 @@
-export default async function postData(url, data) {
+export default async function deleteData(url, data) {
   try {
     const response = await fetch(url, {
       method: "DELETE",
