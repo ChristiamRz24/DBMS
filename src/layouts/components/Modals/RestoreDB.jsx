@@ -28,7 +28,7 @@ const RestoreDB = ({ id, pageName }) => {
       return;
     }
 
-    fetch("/api/postgresql/files/restore.json", {
+    fetch(`/api/${pageName}/files/restore.json`, {
       method: "POST",
       body: file,
     })

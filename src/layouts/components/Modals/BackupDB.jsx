@@ -11,7 +11,7 @@ const BackupDB = ({ id, pageName }) => {
   };
 
   if (isBackup) {
-    fetch("/api/postgresql/files/backup.json")
+    fetch(`/api/${pageName}/files/backup.json`)
       .then((response) => response.json())
       .then((data) => {
         // obtener el nombre del archivo de respaldo

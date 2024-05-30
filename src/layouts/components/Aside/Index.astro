@@ -42,7 +42,7 @@ const roleNames = await fetchData(roleNamesURL);
   <main class="flex flex-col gap-2">
     <Tables pageName={pageName} />
     <Users pageName={pageName} roleNames={roleNames} />
-    <Roles roleNames={roleNames} />
+    <Roles pageName={pageName} roleNames={roleNames} />
   </main>
   <div class="divider"></div>
   <footer>
@@ -50,7 +50,9 @@ const roleNames = await fetchData(roleNamesURL);
       <button class="btn btn-sm btn-primary" onclick="add_user.showModal()">
         Crear usuario
       </button>
-      <button class="btn btn-sm btn-primary" onclick="add_role.showModal()">
+      <button 
+      class={`btn btn-sm btn-primary ${pageName === "mariadb"? "btn-disabled": ""}`}
+      onclick="add_role.showModal()">
         Crear rol
       </button>
       <button
@@ -86,9 +88,9 @@ const roleNames = await fetchData(roleNamesURL);
   <Input type="password" name="passwd" label="Contraseña" example="P@ssw0rd" />
   <Select
     name="role"
-    label="Rol"
+    label = {pageName === "mariadb"? "Privilegios":"Rol"}
     value="rolname"
-    defaultSelected="un rol"
+    defaultSelected={pageName === "mariadb"? "un privilegio":"un rol"}
     options={roleNames}
   />
 </BaseAddModal>

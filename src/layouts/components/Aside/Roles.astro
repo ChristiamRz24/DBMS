@@ -4,15 +4,25 @@ interface RoleName {
 }
 
 interface Props {
+  pageName: String; 
   roleNames: RoleName[];
 }
 
-const { roleNames } = Astro.props;
+const { roleNames, pageName } = Astro.props;
 ---
 
 <div tabindex="3" class="collapse collapse-arrow bg-slate-800 rounded-md">
   <input type="checkbox" class="peer" />
-  <div class="collapse-title font-medium">Roles</div>
+  {
+    pageName === "mariadb" && (
+    <div class="collapse-title font-medium">Privilegios</div>
+    )
+  }
+  {
+    pageName !== "mariadb" && (
+    <div class="collapse-title font-medium">Roles</div>
+    )
+  }
   <div class="collapse-content flex flex-col gap-1">
     {
       roleNames &&

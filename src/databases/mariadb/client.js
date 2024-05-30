@@ -9,5 +9,4 @@ const getConnection = async () => {
 };
 
 const client = await getConnection();
-
 export { client };
