@@ -1,4 +1,4 @@
-# Documentación del Proyecto
+# Documentación del Proyecto (primer parcial)
 
 Este proyecto está construido utilizando varias tecnologías clave. A continuación, se detalla cada una de ellas junto con sus respectivos enlaces para más información:
 
