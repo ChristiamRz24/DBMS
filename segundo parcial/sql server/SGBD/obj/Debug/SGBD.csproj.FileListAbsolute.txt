@@ -1,0 +1,16 @@
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.csproj.AssemblyReference.cache
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD_Automation.Form1.resources
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.Properties.Resources.resources
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.csproj.GenerateResource.cache
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.csproj.CoreCompileInputs.cache
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\SGBD.exe.config
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\SGBD.exe
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\SGBD.pdb
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\itextsharp.dll
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\System.Data.SqlClient.dll
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\itextsharp.xml
+C:\Users\bryan\source\repos\SGBD\SGBD\bin\Debug\System.Data.SqlClient.xml
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.csproj.Up2Date
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.exe
+C:\Users\bryan\source\repos\SGBD\SGBD\obj\Debug\SGBD.pdb
